@@ -21,7 +21,7 @@ def quick(lista):
 
         return quick(menores) + iguais + quick(maiores)
 
-lista2 = [10, 7, 8, 9, 1, 5]
+lista2 = [10, 7, 8, 9, 1, 5,7,23,32,34,22,54,45,56,57,78,12,3,6,7,9,0,2,567,123,124,145,1234,543,678,163,]
 inicio = time.time()
 resultado = quick(lista2)
 fim = time.time()
