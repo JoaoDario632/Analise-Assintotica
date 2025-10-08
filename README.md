@@ -10,7 +10,9 @@ O objetivo é comparar o desempenho prático e teórico de cada método, evidenc
 ```
 ├── Insertion_count.py
 ├── Merge_count.py
-└── Quick_count.py
+├── Quick_count.py
+├── Readme.md
+└── LICENSE
 ```
 
 Cada arquivo contém:

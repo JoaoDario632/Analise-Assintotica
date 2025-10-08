@@ -17,7 +17,7 @@ def gerar_relatorio():
     print("=" * 80)
 
     for n in tamanhos:
-        print(f"\n📊 TESTE COM n = {n} elementos:")
+        print(f"\nTESTE COM n = {n} elementos:")
         print("-" * 50)
         
         # Gerar dados de teste
