@@ -26,3 +26,24 @@ def gerar_relatorio():
         aleatorio = random.sample(range(1, n*10), n)
         
         casos = {'ordenado': ordenado, 'inverso': inverso, 'aleatorio': aleatorio}
+
+        for caso, dados in casos.items():
+            print(f"\n🔹 Caso: {caso.upper()}")
+            
+            # Teste Insertion Sort
+            from Insertion_count import insertion_count
+            result_ins = insertion_count(dados)
+            resultados['insertion'][caso].append({
+                'n': n,
+                'comparacoes': result_ins['comparacoes'],
+                'operacoes': result_ins['deslocamentos'],
+                'tempo': result_ins['tempo_s']
+            })
+            print(f"   Insertion: {result_ins['comparacoes']} comp, {result_ins['deslocamentos']} desl")
+            
+    
+    return resultados
+
+if __name__ == "__main__":
+    print(__doc__)
+    gerar_relatorio()
