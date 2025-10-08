@@ -40,6 +40,28 @@ def gerar_relatorio():
                 'tempo': result_ins['tempo_s']
             })
             print(f"   Insertion: {result_ins['comparacoes']} comp, {result_ins['deslocamentos']} desl")
+
+            # Teste Merge Sort  
+            from Merge_count import run_and_report
+            result_merge = run_and_report(dados)
+            resultados['merge'][caso].append({
+                'n': n,
+                'comparacoes': result_merge['comparacoes'],
+                'operacoes': result_merge['copias'],
+                'tempo': result_merge['tempo_s']
+            })
+            print(f"   Merge:     {result_merge['comparacoes']} comp, {result_merge['copias']} copias")
+
+            # Teste Quick Sort
+            from Quick_count import run_and_report as quick_report
+            result_quick = quick_report(dados)
+            resultados['quick'][caso].append({
+                'n': n,
+                'comparacoes': result_quick['comparacoes'],
+                'operacoes': result_quick['movimentos'],
+                'tempo': result_quick['tempo_s']
+            })
+            print(f"   Quick:     {result_quick['comparacoes']} comp, {result_quick['movimentos']} mov")
             
     
     return resultados
