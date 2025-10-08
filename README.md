@@ -171,4 +171,4 @@ Cada algoritmo possui vantagens específicas que o tornam mais apropriado para d
 </table>
 
 📅 Projeto desenvolvido para fins acadêmicos — Análise de Algoritmos  
-🧮 Universidade / Curso: [inserir instituição ou disciplina, se desejar]
+🧮 Universidade / Curso: [CESUPA - ANÁLISE E PROJETO DE ALGORITMOS]
