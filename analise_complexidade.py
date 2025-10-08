@@ -5,7 +5,7 @@ from typing import List, Dict, Tuple
 
 def gerar_relatorio():
 
-    tamanhos = [10, 50, 100, 200, 500]
+    tamanhos = [10, 50, 100, 200, 500, 1000]
     resultados = {
         'insertion': {'ordenado': [], 'inverso': [], 'aleatorio': []},
         'merge': {'ordenado': [], 'inverso': [], 'aleatorio': []},
@@ -17,7 +17,7 @@ def gerar_relatorio():
     print("=" * 80)
 
     for n in tamanhos:
-        print(f"\nTESTE COM n = {n} elementos:")
+        print(f"\n📶 TESTE COM n = {n} ELEMENTOS:")
         print("-" * 50)
         
         # Gerar dados de teste
@@ -28,7 +28,7 @@ def gerar_relatorio():
         casos = {'ordenado': ordenado, 'inverso': inverso, 'aleatorio': aleatorio}
 
         for caso, dados in casos.items():
-            print(f"\n🔹 Caso: {caso.upper()}")
+            print(f"\n▫️  Caso: {caso.upper()}")
             
             # Teste Insertion Sort
             from Insertion_count import insertion_count
