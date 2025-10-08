@@ -1,18 +1,3 @@
-# ============================================================================
-# MERGE SORT - ANÁLISE DE COMPLEXIDADE ASSINTÓTICA
-# ============================================================================
-# Integrantes: Otto Samuel, Lucas Augusto, Tiago Ferreira, João Dário
-# Algoritmo: Merge Sort (Ordenação por Intercalação)
-# 
-# ANÁLISE TEÓRICA:
-# - Melhor caso:               f(n) = n⌊log₂n⌋      → O(n log n)
-# - Caso médio:                f(n) = n⌈log₂n⌉      → O(n log n)
-# - Pior caso:                 f(n) = n⌈log₂n⌉      → O(n log n)
-#
-# ANÁLISE ASSINTÓTICA:
-# - Big-O: O(n log n)    - Ômega: Ω(n log n)    - Theta: Θ(n log n)
-# ============================================================================
-
 import time
 import random
 from typing import List, Tuple
@@ -20,6 +5,7 @@ from typing import List, Tuple
 # contadores globais (zerar antes de cada experimento)
 comparacoes_ms = 0
 copias_ms = 0  # conta atribuições durante merge (escritas em saída)
+
 
 def merge_count(lista: List[int]) -> List[int]:
     """
@@ -59,6 +45,7 @@ def merge_count(lista: List[int]) -> List[int]:
 
     return resultado
 
+
 def run_and_report(lista):
     global comparacoes_ms, copias_ms
     comparacoes_ms = 0
@@ -67,11 +54,12 @@ def run_and_report(lista):
     ordenada = merge_count(lista)
     fim = time.perf_counter()
     return {
-        'ordenada': ordenada,
-        'comparacoes': comparacoes_ms,
-        'copias': copias_ms,
-        'tempo_s': fim - inicio
+        "ordenada": ordenada,
+        "comparacoes": comparacoes_ms,
+        "copias": copias_ms,
+        "tempo_s": fim - inicio,
     }
+
 
 if __name__ == "__main__":
     # Exemplos: ordenado, inverso, aleatório
@@ -79,9 +67,11 @@ if __name__ == "__main__":
     lista_inversa = list(range(200, 0, -1))
     lista_aleatoria = random.sample(range(1, 10000), 200)
 
-    for nome, lst in (('ordenado', lista_ordenada),
-                      ('inverso', lista_inversa),
-                      ('aleatorio', lista_aleatoria)):
+    for nome, lst in (
+        ("ordenado", lista_ordenada),
+        ("inverso", lista_inversa),
+        ("aleatorio", lista_aleatoria),
+    ):
         resultado = run_and_report(lst)
         print(f"\n#### Merge Sort — caso: {nome} ####")
         print(f"Comparações (merge): {resultado['comparacoes']}")
