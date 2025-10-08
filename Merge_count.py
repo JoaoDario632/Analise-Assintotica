@@ -1,3 +1,18 @@
+# ============================================================================
+# MERGE SORT - ANÁLISE DE COMPLEXIDADE ASSINTÓTICA
+# ============================================================================
+# Integrantes: Otto Samuel, Lucas Augusto, Tiago Ferreira, João Dário
+# Algoritmo: Merge Sort (Ordenação por Intercalação)
+# 
+# ANÁLISE TEÓRICA:
+# - Melhor caso:               f(n) = n⌊log₂n⌋      → O(n log n)
+# - Caso médio:                f(n) = n⌈log₂n⌉      → O(n log n)
+# - Pior caso:                 f(n) = n⌈log₂n⌉      → O(n log n)
+#
+# ANÁLISE ASSINTÓTICA:
+# - Big-O: O(n log n)    - Ômega: Ω(n log n)    - Theta: Θ(n log n)
+# ============================================================================
+
 import time
 import random
 from typing import List, Tuple

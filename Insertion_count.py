@@ -44,7 +44,7 @@ if __name__ == "__main__":
     }
 
     for nome, lista in bases.items():
-        resultado = insertion_count(lista)
+        resultado = insertion_count(lista) # Imprime o resultado do Insertion Sort
         print(f"\n#### Insertion Sort — caso: {nome} ####")
         print(f"Comparações: {resultado['comparacoes']}")
         print(f"Deslocamentos: {resultado['deslocamentos']}")
