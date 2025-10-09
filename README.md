@@ -163,6 +163,13 @@ Cada algoritmo possui vantagens específicas que o tornam mais apropriado para d
        </a>
      </td>
      <td align="center">
+       <a href="https://github.com/ThiagoRosa21">
+         <img src="https://avatars.githubusercontent.com/u/170032355?v=4" style="border-radius: 50%" width="100px;" alt="ferreira"/>
+         <br />
+         <sub><b>Thiago Rosa 💻👑</b></sub>
+       </a>
+     </td>
+     <td align="center">
        <a href="https://github.com/JoaoDario632">
          <img src="https://avatars.githubusercontent.com/u/134674876?v=4" style="border-radius: 50%" width="100px;" alt="ferreira"/>
          <br />
@@ -171,6 +178,7 @@ Cada algoritmo possui vantagens específicas que o tornam mais apropriado para d
      </td>
   </tr>
 </table>
+
 
 📅 Projeto desenvolvido para fins acadêmicos — Análise de Algoritmos  
 🧮 Universidade / Curso: [CESUPA - ANÁLISE E PROJETO DE ALGORITMOS]
