@@ -1,5 +1,6 @@
 # 🔢 Análise de Algoritmos de Ordenação com Contadores de Operações
 
+
 Este projeto implementa e analisa três algoritmos clássicos de ordenação — **Insertion Sort**, **Merge Sort** e **Quick Sort** — com **contadores explícitos** de operações fundamentais (comparações, movimentações e cópias).  
 O objetivo é comparar o desempenho prático e teórico de cada método, evidenciando seu comportamento em diferentes cenários de entrada.
 
