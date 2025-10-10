@@ -4,16 +4,16 @@ from typing import List, Dict
 from tabulate import tabulate
 
 # ================== MERGE SORT =====================
-comparacoes_ms = 0
+compporElemento = 0
 copias_ms = 0
 
 def merge_count(lista: List[int]) -> List[int]:
     """
     Merge Sort recursivo com contadores globais.
-    Atualiza comparacoes_ms (comparações entre elementos)
+    Atualiza compporElemento (comparações entre elementos)
     e copias_ms (escritas durante o merge).
     """
-    global comparacoes_ms, copias_ms
+    global compporElemento, CopiasMG
     if len(lista) <= 1:
         return lista[:]
 
@@ -26,24 +26,24 @@ def merge_count(lista: List[int]) -> List[int]:
 
     # processo de intercalação (merge)
     while i < len(esquerda) and j < len(direita):
-        comparacoes_ms += 1
+        compporElemento += 1
         if esquerda[i] <= direita[j]:
             resultado.append(esquerda[i])
-            copias_ms += 1
+            CopiasMG += 1
             i += 1
         else:
             resultado.append(direita[j])
-            copias_ms += 1
+            CopiasMG += 1
             j += 1
 
     # adiciona o restante das listas
     while i < len(esquerda):
         resultado.append(esquerda[i])
-        copias_ms += 1
+        CopiasMG += 1
         i += 1
     while j < len(direita):
         resultado.append(direita[j])
-        copias_ms += 1
+        CopiasMG += 1
         j += 1
 
     return resultado
@@ -57,16 +57,16 @@ def execucaoM(lista: List[int]) -> Dict[str, object]:
     - tempo
     - complexidade teórica
     """
-    global comparacoes_ms, copias_ms
-    comparacoes_ms = 0
-    copias_ms = 0
+    global compporElemento, CopiasMG
+    compporElemento = 0
+    CopiasMG = 0
     inicio = time.perf_counter()
     merge_count(lista)
     fim = time.perf_counter()
 
     return {
-        "comparacoes": comparacoes_ms,
-        "movimentos": copias_ms,
+        "comparacoes": compporElemento,
+        "movimentos": CopiasMG,
         "tempo": fim - inicio,
         "complexidade": "O(n log n) em todos os casos"
     }
@@ -87,26 +87,26 @@ def comparacao():
     print(tabulate(resultados, headers=headers, floatfmt=".8f", tablefmt="grid"))
 
 
-def analise_teorica(lista: List[int], mostrar_tabela: bool = False) -> Dict[str, object]:
+def analise_teorica(lista: List[int], showTabela: bool = False) -> Dict[str, object]:
     """
-    Executa Merge Sort e, se mostrar_tabela=True,
+    Executa Merge Sort e, se showTabela=True,
     imprime a tabela de contagem e os cálculos de f(n).
     """
-    global comparacoes_ms, copias_ms
-    comparacoes_ms = 0
-    copias_ms = 0
+    global compporElemento, CopiasMG
+    compporElemento = 0
+    CopiasMG = 0
     inicio = time.perf_counter()
     ordenada = merge_count(lista)
     fim = time.perf_counter()
 
     resultado = {
         "ordenada": ordenada,
-        "comparacoes": comparacoes_ms,
-        "copias": copias_ms,
+        "comparacoes": compporElemento,
+        "copias": CopiasMG,
         "tempo_s": fim - inicio,
     }
 
-    if mostrar_tabela:
+    if showTabela:
         # ===== TABELA DE CONTAGEM =====
         headers = ["Instrução", "Médio", "Melhor", "Pior"]
         tabela = [
@@ -119,18 +119,18 @@ def analise_teorica(lista: List[int], mostrar_tabela: bool = False) -> Dict[str,
             ["j = 0", "1", "1", "1"],
             ["resultado = []", "1", "1", "1"],
             ["while i < len(esq) and j < len(dir)", "5(n+1)", "5(n+1)", "5(n+1)"],
-            ["comparacoes_ms += 1", "2n", "2n", "2n"],
+            ["compporElemento += 1", "2n", "2n", "2n"],
             ["if esquerda[i] <= direita[j]", "3n", "3n", "3n"],
             ["resultado.append(...)", "2n", "2n", "2n"],
-            ["copias_ms += 1", "2n", "2n", "2n"],
+            ["CopiasMG += 1", "2n", "2n", "2n"],
             ["i += 1 / j += 1", "2n", "2n", "2n"],
             ["while i < len(esquerda)", "2(n/2+1)", "2(n/2+1)", "2(n/2+1)"],
             ["resultado.append(esq[i])", "2(n/2)", "2(n/2)", "2(n/2)"],
-            ["copias_ms += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["CopiasMG += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
             ["i += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
             ["while j < len(direita)", "2(n/2+1)", "2(n/2+1)", "2(n/2+1)"],
             ["resultado.append(dir[j])", "2(n/2)", "2(n/2)", "2(n/2)"],
-            ["copias_ms += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["CopiasMG += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
             ["j += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
             ["return resultado", "1", "1", "1"],
         ]
@@ -167,4 +167,4 @@ if __name__ == "__main__":
 
     # Exemplo com tabela teórica
     print("\n===== Análise Teórica (com tabela) =====")
-    analise_teorica(lista_aleatoria, mostrar_tabela=True)
+    analise_teorica(lista_aleatoria, showTabela=True)
