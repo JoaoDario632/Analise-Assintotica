@@ -150,7 +150,10 @@ def analise_teorica(lista: List[int], mostrar_tabela: bool = False) -> Dict[str,
         print("f(n/2) = 24 + 30(n/2) + 2f(n/4)")
         print("f(n/4) = 24 + 30(n/4) + 2f(n/8)")
         print("...")
-        print("f(n) = 24 + 30n + 2n*log₂n → Θ(n log n)")
+        print("f(2) = 24 + 30*2 + 2f(1)")
+        print("f(1) = 4")
+        
+        print("\nf(n) = 30n*log2n + 28n - 24 ∈ Θ(n log n)")
 
         print("\n✅ Conclusão: Todos os casos do Merge Sort têm a mesma complexidade,"
               " pois não dependem da ordem dos valores.")
