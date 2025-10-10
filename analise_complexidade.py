@@ -42,7 +42,7 @@ def gerar_relatorio():
             print(f"   Insertion: {result_ins['comparacoes']} comp, {result_ins['deslocamentos']} desl")
 
             # Teste Merge Sort  
-            from Merge_count import run_and_report
+            from Merge_count import analise_teorica as run_and_report
             result_merge = run_and_report(dados)
             resultados['merge'][caso].append({
                 'n': n,
@@ -53,7 +53,7 @@ def gerar_relatorio():
             print(f"   Merge:     {result_merge['comparacoes']} comp, {result_merge['copias']} copias")
 
             # Teste Quick Sort
-            from Quick_count import run_and_report as quick_report
+            from Quick_count import analise_teorica as quick_report
             result_quick = quick_report(dados)
             resultados['quick'][caso].append({
                 'n': n,
