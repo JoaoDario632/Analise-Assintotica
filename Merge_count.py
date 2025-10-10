@@ -1,16 +1,16 @@
-import time
 import random
-from typing import List, Tuple
+import time
+from typing import List, Dict
 
-# contadores globais (zerar antes de cada experimento)
+# ====================== MERGE SORT ===========================
 comparacoes_ms = 0
-copias_ms = 0  # conta atribuições durante merge (escritas em saída)
-
+copias_ms = 0  # conta atribuições durante o merge (escritas na lista de saída)
 
 def merge_count(lista: List[int]) -> List[int]:
     """
-    Merge Sort com contadores globais.
-    Retorna lista ordenada. Os contadores são atualizados nas variáveis globais.
+    Merge Sort recursivo com contadores globais.
+    Atualiza comparacoes_ms (comparações entre elementos)
+    e copias_ms (escritas durante o merge).
     """
     global comparacoes_ms, copias_ms
     if len(lista) <= 1:
@@ -22,6 +22,8 @@ def merge_count(lista: List[int]) -> List[int]:
 
     i = j = 0
     resultado: List[int] = []
+
+    # processo de intercalação (merge)
     while i < len(esquerda) and j < len(direita):
         comparacoes_ms += 1
         if esquerda[i] <= direita[j]:
@@ -33,7 +35,7 @@ def merge_count(lista: List[int]) -> List[int]:
             copias_ms += 1
             j += 1
 
-    # copiar o restante
+    # adiciona o restante das listas
     while i < len(esquerda):
         resultado.append(esquerda[i])
         copias_ms += 1
@@ -46,23 +48,31 @@ def merge_count(lista: List[int]) -> List[int]:
     return resultado
 
 
-def run_and_report(lista):
+def execucaoM(lista: List[int]) -> Dict[str, object]:
+    """
+    Executa Merge Sort e retorna métricas padronizadas:
+    - comparações
+    - movimentos (cópias)
+    - tempo
+    - complexidade teórica
+    """
     global comparacoes_ms, copias_ms
     comparacoes_ms = 0
     copias_ms = 0
     inicio = time.perf_counter()
-    ordenada = merge_count(lista)
+    merge_count(lista)
     fim = time.perf_counter()
+
     return {
-        "ordenada": ordenada,
         "comparacoes": comparacoes_ms,
-        "copias": copias_ms,
-        "tempo_s": fim - inicio,
+        "movimentos": copias_ms,
+        "tempo": fim - inicio,
+        "complexidade": "O(n log n) em todos os casos"
     }
 
 
+# ====================== TESTE LOCAL ===========================
 if __name__ == "__main__":
-    # Exemplos: ordenado, inverso, aleatório
     lista_ordenada = list(range(1, 201))
     lista_inversa = list(range(200, 0, -1))
     lista_aleatoria = random.sample(range(1, 10000), 200)
@@ -72,8 +82,9 @@ if __name__ == "__main__":
         ("inverso", lista_inversa),
         ("aleatorio", lista_aleatoria),
     ):
-        resultado = run_and_report(lst)
+        resultado = execucaoM(lst)
         print(f"\n#### Merge Sort — caso: {nome} ####")
         print(f"Comparações (merge): {resultado['comparacoes']}")
-        print(f"Escritas/copias (merge): {resultado['copias']}")
-        print(f"Tempo: {resultado['tempo_s']:.8f} s")
+        print(f"Movimentos/copias: {resultado['movimentos']}")
+        print(f"Tempo: {resultado['tempo']:.8f} s")
+        print(f"Complexidade: {resultado['complexidade']}")
