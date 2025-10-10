@@ -1,10 +1,11 @@
-import random
 import time
+import random
 from typing import List, Dict
+from tabulate import tabulate
 
-# ====================== MERGE SORT ===========================
+# ================== MERGE SORT =====================
 comparacoes_ms = 0
-copias_ms = 0  # conta atribuições durante o merge (escritas na lista de saída)
+copias_ms = 0
 
 def merge_count(lista: List[int]) -> List[int]:
     """
@@ -70,21 +71,100 @@ def execucaoM(lista: List[int]) -> Dict[str, object]:
         "complexidade": "O(n log n) em todos os casos"
     }
 
+def comparacao():
+    casos = {
+        "Ordenado": list(range(1, 21)),
+        "Inverso": list(range(20, 0, -1)),
+        "Aleatório": random.sample(range(1, 1000), 20)
+    }
 
-# ====================== TESTE LOCAL ===========================
+    resultados = []
+    for nome, lista in casos.items():
+        resultados.append(["Merge Sort", nome, *execucaoM(lista).values()])
+
+    headers = ["Algoritmo", "Caso", "Comparações", "Movimentos", "Tempo (s)", "Complexidade Teórica"]
+    print("\n===== Tabela comparativa MergeSort =====\n")
+    print(tabulate(resultados, headers=headers, floatfmt=".8f", tablefmt="grid"))
+
+
+def analise_teorica(lista: List[int], mostrar_tabela: bool = False) -> Dict[str, object]:
+    """
+    Executa Merge Sort e, se mostrar_tabela=True,
+    imprime a tabela de contagem e os cálculos de f(n).
+    """
+    global comparacoes_ms, copias_ms
+    comparacoes_ms = 0
+    copias_ms = 0
+    inicio = time.perf_counter()
+    ordenada = merge_count(lista)
+    fim = time.perf_counter()
+
+    resultado = {
+        "ordenada": ordenada,
+        "comparacoes": comparacoes_ms,
+        "copias": copias_ms,
+        "tempo_s": fim - inicio,
+    }
+
+    if mostrar_tabela:
+        # ===== TABELA DE CONTAGEM =====
+        headers = ["Instrução", "Médio", "Melhor", "Pior"]
+        tabela = [
+            ["if len(lista) <= 1", "2", "2", "2"],
+            ["return lista[:]", "2", "2", "2"],
+            ["meio = len(lista)//2", "3", "3", "3"],
+            ["esquerda = merge_count(...)", "f(n/2)+2", "f(n/2)+2", "f(n/2)+2"],
+            ["direita = merge_count(...)", "f(n/2)+2", "f(n/2)+2", "f(n/2)+2"],
+            ["i = 0", "1", "1", "1"],
+            ["j = 0", "1", "1", "1"],
+            ["resultado = []", "1", "1", "1"],
+            ["while i < len(esq) and j < len(dir)", "5(n+1)", "5(n+1)", "5(n+1)"],
+            ["comparacoes_ms += 1", "2n", "2n", "2n"],
+            ["if esquerda[i] <= direita[j]", "3n", "3n", "3n"],
+            ["resultado.append(...)", "2n", "2n", "2n"],
+            ["copias_ms += 1", "2n", "2n", "2n"],
+            ["i += 1 / j += 1", "2n", "2n", "2n"],
+            ["while i < len(esquerda)", "2(n/2+1)", "2(n/2+1)", "2(n/2+1)"],
+            ["resultado.append(esq[i])", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["copias_ms += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["i += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["while j < len(direita)", "2(n/2+1)", "2(n/2+1)", "2(n/2+1)"],
+            ["resultado.append(dir[j])", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["copias_ms += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["j += 1", "2(n/2)", "2(n/2)", "2(n/2)"],
+            ["return resultado", "1", "1", "1"],
+        ]
+        print("\n===== Tabela de Contagem do Merge Sort =====\n")
+        print(tabulate(tabela, headers=headers, tablefmt="grid"))
+
+        # ===== CÁLCULOS DA FUNÇÃO f(n) =====
+        print("\n===== Cálculo da Função de Complexidade f(n) =====\n")
+        print("f(n) = 2 + 2 + 3 + f(n/2)+2 + f(n/2)+2 + 1 + 1 + 1 + 5(n+1) "
+              "+ 2n + 3n + 2n + 2n + 2n + 2(n/2+1) + 2(n/2) + 2(n/2) "
+              "+ 2(n/2) + 2(n/2+1) + 2(n/2) + 2(n/2) + 2(n/2) + 1")
+
+        print("\nSimplificação → f(n) = 24 + 30n + 2f(n/2)")
+
+        print("\nExpandindo a recorrência:")
+        print("f(n) = 24 + 30n + 2f(n/2)")
+        print("f(n/2) = 24 + 30(n/2) + 2f(n/4)")
+        print("f(n/4) = 24 + 30(n/4) + 2f(n/8)")
+        print("...")
+        print("f(n) = 24 + 30n + 2n*log₂n → Θ(n log n)")
+
+        print("\n✅ Conclusão: Todos os casos do Merge Sort têm a mesma complexidade,"
+              " pois não dependem da ordem dos valores.")
+
+    return resultado
+
+
+# ================== TESTE LOCAL =====================
 if __name__ == "__main__":
-    lista_ordenada = list(range(1, 201))
-    lista_inversa = list(range(200, 0, -1))
-    lista_aleatoria = random.sample(range(1, 10000), 200)
+    comparacao()
+    lista_ordenada = list(range(1, 21))
+    lista_inversa = list(range(20, 0, -1))
+    lista_aleatoria = random.sample(range(1, 100), 20)
 
-    for nome, lst in (
-        ("ordenado", lista_ordenada),
-        ("inverso", lista_inversa),
-        ("aleatorio", lista_aleatoria),
-    ):
-        resultado = execucaoM(lst)
-        print(f"\n#### Merge Sort — caso: {nome} ####")
-        print(f"Comparações (merge): {resultado['comparacoes']}")
-        print(f"Movimentos/copias: {resultado['movimentos']}")
-        print(f"Tempo: {resultado['tempo']:.8f} s")
-        print(f"Complexidade: {resultado['complexidade']}")
+    # Exemplo com tabela teórica
+    print("\n===== Análise Teórica (com tabela) =====")
+    analise_teorica(lista_aleatoria, mostrar_tabela=True)
