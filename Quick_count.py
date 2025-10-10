@@ -136,15 +136,15 @@ def analise_teorica(lista: List[int], mostrar_tabela: bool = False) -> Dict[str,
 
         print("\n🔹 Melhor caso: k = n/2 (divisão equilibrada)")
         print("f(n) = 21 + 15n + 2f(n/2)")
-        print("Expansão → f(n) = 21 + 15n·log₂n + n·log₂n → Ω(n log n)")
+        print("Expansão → f(n) = 15n*log2n + 28n - 21 ∈ Ω(n log n)")
 
         print("\n🔹 Pior caso: k = 1 (pivô sempre menor/maior)")
         print("f(n) = 21 + 15n + f(1) + f(n-1)")
-        print("Expansão da série → f(n) ≈ 7.5n² + 35.5n + 7 → O(n²)")
+        print("Expansão da série → f(n) = 7.5n² + 35.5n + 7 ∈ O(n²)")
 
         print("\n🔹 Caso médio: k ≈ n/2 (divisão balanceada em média)")
         print("f(n) = 21 + 15n + 2f(n/2)")
-        print("Expansão → f(n) = 21 + 15n·log₂n + n·log₂n → Θ(n log n)")
+        print("Expansão → f(n) = 15n*log2n + 28n - 21 ∈ Θ(n log n)")
 
     return resultado
 
